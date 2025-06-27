@@ -1,0 +1,58 @@
+### 🔒 Setup and Use a Firewall on Windows (Short Steps)
+
+#### **1. Open Firewall Tool**
+
+* Go to **Start** → Search and open **Windows Firewall with Advanced Security**.
+
+#### **2. List Current Rules**
+
+* Click **Inbound Rules** (left panel) to view existing rules.
+
+#### **3. Block Port 23 (Telnet)**
+
+* Click **New Rule** (right panel).
+* Choose **Port** → **TCP** → Enter **23** → Click **Next**.
+* Select **Block the connection** → **Next**.
+* Apply to all profiles → **Next**.
+* Name the rule: `Block Telnet Inbound` → Click **Finish**.
+
+#### **4. Test the Rule**
+
+* Run `telnet <your_IP> 23` from another device.
+* Connection should **fail** (blocked).
+
+#### **5. Allow SSH (Linux Only)**
+
+```bash
+sudo ufw allow 22
+```
+
+#### **6. Remove the Rule**
+
+* **Windows**: Right-click the rule in Inbound Rules → Delete.
+* **Linux**:
+
+```bash
+sudo ufw delete deny 23
+```
+
+#### **7. Documented Commands (Linux)**
+
+```bash
+sudo ufw status
+sudo ufw deny 23
+sudo ufw allow 22
+sudo ufw delete deny 23
+```
+
+#### **8. How Firewall Filters Traffic (Summary)**
+
+* Firewalls control traffic using rules based on:
+
+  * **Ports** (e.g., 23, 22)
+  * **Protocol** (TCP/UDP)
+  * **IP Address**
+* **Allow** rules let traffic through; **Block** rules deny it.
+* Helps protect against unauthorized access.
+
+---
